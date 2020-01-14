@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 std::string generatePassword();
@@ -31,14 +33,12 @@ int main()
 std::string generatePassword()
 {
 	std::string password = "";
-	srand(time(0));
-	int num = 0;
-	int letter;
-	while(num < 9)
+	srand(0);
+	int num;
+	for(int i = 0; i < 9; i++)
 	{
-		letter = rand() % 122 + 97;
-		password += (char) letter;
-		num++;
+		num = rand() % 26 + 97;
+		password += (char) num;
 	}
 	return password;
 }
