@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 
-std::string generatePassword();
+std::string generatePassword(std::string lastNames);
 
 int main()
 {
@@ -22,19 +22,25 @@ int main()
 	while(std::getline(in, temp))
 	{
 		lastNames = temp.substr(0, temp.find_first_of(" ", 0));
-		password = generatePassword();
-		User = lastNames + "\t" + password + "\n";
+		password = generatePassword(lastNames);
+		User = lastNames + " " + password + "\n";
 		out << User;
 	}
 	in.close();
 	out.close();
 }
 
-std::string generatePassword()
+std::string generatePassword(std::string lastNames)
 {
 	std::string password = "";
-	srand(0);
+	int random;
 	int num;
+
+	for(int i = 0; i < lastNames.length(); i++)
+	{
+		random += (int) lastNames[i];
+	}
+	srand(random);
 	for(int i = 0; i < 9; i++)
 	{
 		num = rand() % 26 + 97;
