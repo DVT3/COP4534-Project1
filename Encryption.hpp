@@ -13,8 +13,6 @@ class Encryption
 	public:
 		std::string generatePassword(std::string UserID);
 		std::string encryptPassword(std::string password);
-	private:
-
 };
 
 #endif
