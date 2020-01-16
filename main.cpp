@@ -1,50 +1,42 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-#include <string>
 #include <sstream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
 
-std::string generatePassword(std::string lastNames);
+#include "Encryption.hpp"
 
 int main()
 {
 	std::ifstream in("lastNames.txt");
 	std::ofstream out("rawData.txt");
 
-	std::string lastNames;
+	std::string lastName;
 	std::string temp;
 	std::string password;
 	std::string User;
 
+	Encryption e;
+
 	while(std::getline(in, temp))
 	{
-		lastNames = temp.substr(0, temp.find_first_of(" ", 0));
-		password = generatePassword(lastNames);
-		User = lastNames + " " + password + "\n";
+		lastName = temp.substr(0, temp.find(" "));
+		password = e.generatePassword(lastName);
+		User = lastName + " " + password + "\n";
 		out << User;
 	}
 	in.close();
 	out.close();
-}
 
-std::string generatePassword(std::string lastNames)
-{
-	std::string password = "";
-	int random;
-	int num;
+	std::ifstream in2("rawData.txt");
+	std::ofstream out2("encryptedData.txt");
 
-	for(int i = 0; i < lastNames.length(); i++)
+	while(std::getline(in2, temp))
 	{
-		random += (int) lastNames[i];
+		lastName = temp.substr(0, temp.find(" "));
+		password = e.encryptPassword(temp.substr(temp.find(" ") + 1, 9));
+		User = lastName + " " + password + "\n";
+		out2 << User;
 	}
-	srand(random);
-	for(int i = 0; i < 9; i++)
-	{
-		num = rand() % 26 + 97;
-		password += (char) num;
-	}
-	return password;
+	in2.close();
+	out2.close();
 }
