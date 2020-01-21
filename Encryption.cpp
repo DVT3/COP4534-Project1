@@ -6,7 +6,7 @@ std::string Encryption::generatePassword(std::string UserID)
 	int random;
 	int num;
 
-	for(int i = 0; i < UserID.length(); i++)
+	for(unsigned int i = 0; i < UserID.length(); i++)
 	{
 		random += (int) UserID[i];
 	}
@@ -23,12 +23,9 @@ std::string Encryption::encryptPassword(std::string password)
 {
 	std::string encryptedPassword;
 	std::string key = "jones";
-
-	for(int i = 0; i < password.length(); i++)
+	for(unsigned int i = 0; i < password.length(); i++)
 	{
-		int x = (password[i] + key[i]) % 26;
-		x += 'a';
-		encryptedPassword.push_back(x);
+		encryptedPassword += ((password[i] - 97) + (key[i] - 97)) % 26 + 'a';
 	}
 	return encryptedPassword;
 }

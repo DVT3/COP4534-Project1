@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "Encryption.hpp"
+#include "HashTable.hpp"
 
 int main()
 {
