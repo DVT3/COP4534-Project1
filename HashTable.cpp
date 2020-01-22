@@ -27,8 +27,8 @@ void HashTable::Insert(std::string UserID, std::string password)
 	}
 	else
 	{
-		current->
-		setNext(this->head[HashValue]);
+		current->setNext(this->head[HashValue]);
 		table[HashValue] = current;
+		this->head[HashValue] = current;
 	}
 }

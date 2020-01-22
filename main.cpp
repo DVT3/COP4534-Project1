@@ -8,8 +8,8 @@
 
 int main()
 {
-	std::ifstream in("lastNames.txt");
-	std::ofstream out("rawData.txt");
+	std::ifstream in("textfiles/lastNames.txt");
+	std::ofstream out("textfiles/rawData.txt");
 
 	std::string lastName;
 	std::string temp;
@@ -28,8 +28,8 @@ int main()
 	in.close();
 	out.close();
 
-	std::ifstream in2("rawData.txt");
-	std::ofstream out2("encryptedData.txt");
+	std::ifstream in2("textfiles/rawData.txt");
+	std::ofstream out2("textfiles/encryptedData.txt");
 
 	while(std::getline(in2, temp))
 	{
