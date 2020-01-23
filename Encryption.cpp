@@ -25,7 +25,15 @@ std::string Encryption::encryptPassword(std::string password)
 	std::string key = "jones";
 	for(unsigned int i = 0; i < password.length(); i++)
 	{
-		int x = ((password[i] - 97) + (key[i] - 97)) % 26 + 'a';
+		int x;
+		if(i < 5)
+		{
+			x = ((password[i] - 97) + (key[i] - 97)) % 26 + 'a';
+		}
+		else
+		{
+			x = ((password[i] - 97) + (key[i - 5] - 97)) % 26 + 'a';
+		}
 		encryptedPassword.push_back(x);
 	}
 	return encryptedPassword;

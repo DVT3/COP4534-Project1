@@ -13,10 +13,10 @@ class HashTable
 		HashTable();
 		int HashFunction(int key);
 		void Insert(std::string UserID, std::string password);
+		Node * Search(std::string UserID);
 	private:
-		Node ** table;
 		const int TABLE_SIZE = 26;
-		Node ** head = new Node * [TABLE_SIZE];
+		Node ** table = new Node * [TABLE_SIZE];
 };
 
 #endif
