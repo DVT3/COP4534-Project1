@@ -44,13 +44,13 @@ TEST_CASE("class Encryption")
 
 TEST_CASE("class HashTable")
 {
-	HashTable * hash = new HashTable();
+	HashTable hash;
 
-	hash->Insert("SMITH", "password");
-	hash->Insert("SMORC", "awdhguiha");
-	hash->Insert("TRAN", "qwiornvowe");
+	hash.Insert("SMITH", "password");
+	hash.Insert("SMORC", "awdhguiha");
+	hash.Insert("TRAN", "qwiornvowe");
 
-	REQUIRE(hash->Search("SMITH")->getPassword() == "password");
-	REQUIRE(hash->Search("TRAN")->getPassword() == "qwiornvowe");
-	REQUIRE(hash->Search("SMORC")->getPassword() == "awdhguiha");
+	REQUIRE(hash.Search("SMITH")->getPassword() == "password");
+	REQUIRE(hash.Search("TRAN")->getPassword() == "qwiornvowe");
+	REQUIRE(hash.Search("SMORC")->getPassword() == "awdhguiha");
 }

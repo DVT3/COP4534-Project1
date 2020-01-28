@@ -1,11 +1,15 @@
 #include <iostream>
 #include <cstdlib>
-#include <fstream>
 #include <sstream>
 
-#include "Node.hpp"
+#include "TextReader.hpp"
 #include "Encryption.hpp"
 #include "HashTable.hpp"
+
+#include <string>
+#include <fstream>
+#include <cstdlib>
+#include <sstream>
 
 /***************************************************************
 Student Name: Daniel Tran
@@ -26,55 +30,29 @@ data.
 
 int main()
 {
-	// Opens the lastNames.txt and rawData.txt text files to read from and to write to respectively
-	std::ifstream in("textfiles/lastNames.txt");
-	std::ofstream out("textfiles/rawData.txt");
-
-	// Variables
-	std::string temp;
-	std::string lastName;
-	std::string password;
-	std::string User;
-
-	// Access Encryption
+	TextReader t;
 	Encryption e;
-
-	// Reads from lastName.txt to get last name, generates a password, and then writes to rawData.txt
-	while(std::getline(in, temp))
-	{
-		lastName = temp.substr(0, temp.find(" "));		// Gets the last name only from each line
-		password = e.generatePassword(lastName); 		// Generates a 9 character password based on the last name
-		User = lastName + " " + password + "\n";
-		out << User; 									// Writes the last name and generated password to rawData.txt
-	}
-	in.close();
-	out.close();
-
-	// Opens the rawData.txt and encryptedData.txt text files to read from and to write to respectively
-	std::ifstream in2("textfiles/rawData.txt");
-	std::ofstream out2("textfiles/encryptedData.txt");
-
-	// Reads from rawData.txt to get both the userID and password, encrypts the password, and then writes to encryptedData.txt
-	while(std::getline(in2, temp))
-	{
-		lastName = temp.substr(0, temp.find(" ")); 							// Gets the userID from each line
-		password = e.encryptPassword(temp.substr(temp.find(" ") + 1, 9)); 	// Gets the password from each line and then encrypts it
-		User = lastName + " " + password + "\n";
-		out2 << User; 														// Writes the userID and password to encryptedData.txt
-	}
-	in2.close();
-	out2.close();
-
-
 	HashTable * hash = new HashTable();
-	std::ifstream in3("textfiles/encryptedData.txt");
-	std::string encryptTemp;
 
-	while(std::getline(in3, encryptTemp))
+	std::string temp;
+	std::string userID;
+	std::string password;
+	std::string encryptedPassword;
+
+	t.CreateTextFile("textfiles/lastNames.txt", "textfiles/rawData.txt", false);
+	t.CreateTextFile("textfiles/rawData.txt", "textfiles/encryptedData.txt", true);
+	t.InsertFromText("textfiles/encryptedData.txt");
+
+	std::ifstream in("textfiles/rawData.txt");
+
+	for(int i = 0; i < 5; i++)
 	{
-		hash->Insert(encryptTemp.substr(0, encryptTemp.find(" ")), encryptTemp.substr(encryptTemp.find(" ") + 1, 9));
+		std::getline(in, temp);
+		userID = temp.substr(0, temp.find(" "));
+		password = e.generatePassword(userID);
+		encryptedPassword = hash->Search(userID)->getPassword();
+		std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << std::endl;
 	}
-	in3.close();
 
 	return 0;
 }

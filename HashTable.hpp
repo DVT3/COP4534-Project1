@@ -15,8 +15,7 @@ class HashTable
 		void Insert(std::string UserID, std::string password);
 		Node * Search(std::string UserID);
 	private:
-		const int TABLE_SIZE = 26;
-		Node ** table = new Node * [TABLE_SIZE];
+		Node * table[90000];
 };
 
 #endif
