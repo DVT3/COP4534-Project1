@@ -11,7 +11,7 @@ class HashTable
 {
 	public:
 		HashTable();
-		int HashFunction(int key);
+		int HashFunction(std::string UserID);
 		void Insert(std::string UserID, std::string password);
 		Node * Search(std::string UserID);
 	private:

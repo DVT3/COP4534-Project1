@@ -8,6 +8,15 @@
 #include <stdio.h>
 #include <time.h>
 
+/***************************************************************
+Student Name: Daniel Tran
+File Name: Encryption.hpp
+Assignment number: Project 1
+
+The Encryption.hpp file declares the generatePassword function
+and the encryptPassword function.
+***************************************************************/
+
 class Encryption
 {
 	public:

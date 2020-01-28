@@ -45,29 +45,12 @@ TEST_CASE("class Encryption")
 TEST_CASE("class HashTable")
 {
 	HashTable * hash = new HashTable();
-	Encryption e;
-	std::ifstream in1("textfile/rawData.txt");
-	std::ifstream in2("textfile/encryptedData.txt");
-	std::string temp;
-	std::string UserID;
-	std::string password;
 
-	while(std::getline(in2, temp))
-	{
-		UserID = temp.substr(0, temp.find(" "));
-		password = temp.substr(temp.find(" ") + 1, 9);
-		hash->Insert(UserID, password);
-	}
+	hash->Insert("SMITH", "password");
+	hash->Insert("SMORC", "awdhguiha");
+	hash->Insert("TRAN", "qwiornvowe");
 
-	while(std::getline(in1, temp))
-	{
-		UserID = temp.substr(0, temp.find(" "));
-		password = temp.substr(temp.find(" ") + 1, 9);
-		password = e.encryptPassword(password);
-		REQUIRE(hash->Search(UserID)->getUserID() == UserID);
-		REQUIRE(hash->Search(UserID)->getPassword() == password); 
-	}
-
-	in1.close();
-	in2.close();
+	REQUIRE(hash->Search("SMITH")->getPassword() == "password");
+	REQUIRE(hash->Search("TRAN")->getPassword() == "qwiornvowe");
+	REQUIRE(hash->Search("SMORC")->getPassword() == "awdhguiha");
 }

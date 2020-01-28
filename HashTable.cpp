@@ -8,17 +8,17 @@ HashTable::HashTable()
 	}
 }
 
-int HashTable::HashFunction(int key)
+int HashTable::HashFunction(std::string UserID)
 {
+	int key = (int) UserID.at(0) - 97;
 	return key % TABLE_SIZE;
 }
 
 void HashTable::Insert(std::string UserID, std::string password)
 {
-	int key = (int) UserID.at(0) - 97;
-	int HashValue = HashFunction(key);
+	int HashValue = HashFunction(UserID);
 	Node * current = new Node(UserID, password);
-	
+
 	if(table[HashValue] == nullptr)
 	{
 		table[HashValue] = current;
@@ -32,11 +32,10 @@ void HashTable::Insert(std::string UserID, std::string password)
 
 Node * HashTable::Search(std::string UserID)
 {
-	int key = (int) UserID.at(0) - 97;
-	int HashValue = HashFunction(key);
+	int HashValue = HashFunction(UserID);
 	Node * current = table[HashValue];
 
-	while(current->getNext() != nullptr)
+	while(current != nullptr)
 	{
 		if(current->getUserID() == UserID)
 		{
