@@ -35,22 +35,3 @@ void TextReader::CreateTextFile(std::string infile, std::string outfile, bool en
 	in.close();
 	out.close();
 }
-
-void TextReader::InsertFromText(std::string textfile)
-{
-	HashTable * hash = new HashTable();
-
-	std::ifstream in(textfile);
-	std::string temp;
-	std::string userID;
-	std::string password;
-
-	while(std::getline(in, temp))
-	{
-		userID = temp.substr(0, temp.find(" "));
-		password = temp.substr(temp.find(" ") + 1, 9);
-		hash->Insert(userID, password);
-	}
-	
-	in.close();
-}

@@ -10,7 +10,6 @@ class TextReader
 {
 	public:
 		void CreateTextFile(std::string infile, std::string outfile, bool encrypt);
-		void InsertFromText(std::string textfile);
 };
 
 #endif

@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <sstream>
 
+#include "Node.hpp"
 #include "TextReader.hpp"
 #include "Encryption.hpp"
 #include "HashTable.hpp"
@@ -32,27 +33,71 @@ int main()
 {
 	TextReader t;
 	Encryption e;
-	HashTable * hash = new HashTable();
+	HashTable hash;
 
 	std::string temp;
 	std::string userID;
 	std::string password;
+	std::string changedPassword;
 	std::string encryptedPassword;
 
+	// Creates rawData.txt and encryptedData.txt
 	t.CreateTextFile("textfiles/lastNames.txt", "textfiles/rawData.txt", false);
 	t.CreateTextFile("textfiles/rawData.txt", "textfiles/encryptedData.txt", true);
-	t.InsertFromText("textfiles/encryptedData.txt");
 
-	std::ifstream in("textfiles/rawData.txt");
+	// Inserts data from encryptedData.txt into hash table
+	std::ifstream in("textfiles/encryptedData.txt");
+	while(std::getline(in, temp))
+	{
+		userID = temp.substr(0, temp.find(" "));
+		password = temp.substr(temp.find(" ") + 1, 9);
+		hash.Insert(userID, password);
+	}
+	in.close();
 
+	// Reads data from rawData.txt and compares the first five passwords from it with the password it finds in the hash table with the same userID
+	std::cout << "Check legal User ID and Passwords:" << std::endl;
+	std::ifstream in2("textfiles/rawData.txt");
 	for(int i = 0; i < 5; i++)
 	{
-		std::getline(in, temp);
+		std::getline(in2, temp);
 		userID = temp.substr(0, temp.find(" "));
-		password = e.generatePassword(userID);
-		encryptedPassword = hash->Search(userID)->getPassword();
-		std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << std::endl;
-	}
+		password = e.encryptPassword(temp.substr(temp.find(" ") + 1, 9));
+		encryptedPassword = hash.Search(userID)->getPassword();
+		if(password == encryptedPassword)
+		{
+			std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << " | SAME" << std::endl;
+		}
+		else
+		{
+			std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << " | NOT SAME" << std::endl;
 
-	return 0;
+		}
+	}
+	in2.close();
+
+	std::cout << std::endl;
+
+	// Reads data from rawData.txt, changes a character in the password with something else, then compares it to a password found in the hash table with the same userID
+	std::cout << "Check legal User ID and illegal Passwords:" << std::endl;
+	std::ifstream in3("textfiles/rawData.txt");
+	for(int i = 0; i < 5; i++)
+	{
+		std::getline(in3, temp);
+		userID = temp.substr(0, temp.find(" "));
+		password = temp.substr(temp.find(" ") + 1, 9);
+		password.at(4) = password.at(4) + 1;
+		changedPassword = e.encryptPassword(password);
+		encryptedPassword = hash.Search(userID)->getPassword();
+		if(password == encryptedPassword)
+		{
+			std::cout << userID << " - Plaintext password: " << changedPassword << " | Encrypted Password: " << encryptedPassword << " | SAME" << std::endl;
+		}
+		else
+		{
+			std::cout << userID << " - Plaintext password: " << changedPassword << " | Encrypted Password: " << encryptedPassword << " | NOT SAME" << std::endl;
+
+		}
+	}
+	in3.close();
 }

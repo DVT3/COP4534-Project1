@@ -25,7 +25,7 @@ class Node
 	private:
 		std::string UserID;
 		std::string password;
-		Node * next = nullptr;
+		Node * next;
 };
 
 #endif

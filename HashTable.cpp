@@ -1,13 +1,5 @@
 #include "HashTable.hpp"
 
-HashTable::HashTable()
-{
-	for(int i = 0; i < 90000; i++)
-	{
-		this->table[i] = nullptr;
-	}
-}
-
 int HashTable::HashFunction(std::string UserID)
 {
 	int key;
