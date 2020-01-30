@@ -59,6 +59,7 @@ int main()
 
 	// Reads data from rawData.txt and compares the first five passwords from it with the password it finds in the hash table with the same userID
 	std::cout << "Check legal User ID and Passwords:" << std::endl;
+	std::cout << "UserID\t\tPlaintext Password\tEncrypted Password\tResult" << std::endl;
 	std::ifstream in2("textfiles/rawData.txt");
 	for(int i = 0; i < 5; i++)
 	{
@@ -68,11 +69,11 @@ int main()
 		encryptedPassword = hash.Search(userID)->getPassword();
 		if(password == encryptedPassword)
 		{
-			std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << " | SAME" << std::endl;
+			std::cout << userID << "\t\t" << password << "\t\t" << encryptedPassword << "\t\tMATCH" << std::endl;
 		}
 		else
 		{
-			std::cout << userID << " - Plaintext password: " << password << " | Encrypted Password: " << encryptedPassword << " | NOT SAME" << std::endl;
+			std::cout << userID << "\t\t" << password << "\t\t" << encryptedPassword << "\t\tNO MATCH" << std::endl;
 
 		}
 	}
@@ -82,6 +83,7 @@ int main()
 
 	// Reads data from rawData.txt, changes a character in the password with something else, then compares it to a password found in the hash table with the same userID
 	std::cout << "Check legal User ID and illegal Passwords:" << std::endl;
+	std::cout << "UserID\t\tPlaintext Password\tEncrypted Password\tResult" << std::endl;
 	std::ifstream in3("textfiles/rawData.txt");
 	for(int i = 0; i < 5; i++)
 	{
@@ -93,11 +95,11 @@ int main()
 		encryptedPassword = hash.Search(userID)->getPassword();
 		if(password == encryptedPassword)
 		{
-			std::cout << userID << " - Plaintext password: " << changedPassword << " | Encrypted Password: " << encryptedPassword << " | SAME" << std::endl;
+			std::cout << userID << "\t\t" << password << "\t\t" << encryptedPassword << "\t\tMATCH" << std::endl;
 		}
 		else
 		{
-			std::cout << userID << " - Plaintext password: " << changedPassword << " | Encrypted Password: " << encryptedPassword << " | NOT SAME" << std::endl;
+			std::cout << userID << "\t\t" << password << "\t\t" << encryptedPassword << "\t\tNO MATCH" << std::endl;
 
 		}
 	}
