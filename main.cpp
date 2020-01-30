@@ -31,10 +31,12 @@ data.
 
 int main()
 {
+	// Objects
 	TextReader t;
 	Encryption e;
 	HashTable hash;
 
+	// Variables
 	std::string temp;
 	std::string userID;
 	std::string password;

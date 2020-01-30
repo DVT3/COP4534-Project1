@@ -2,6 +2,20 @@
 #include "Encryption.hpp"
 #include "HashTable.hpp"
 
+/***************************************************************
+Student Name: Daniel Tran
+File Name: TextReader.cpp
+Assignment number: Project 1
+
+This file takes in two strings: one textfile to read from and the
+other to write to. A boolean is also passed into the method. If
+the boolean is false, then the function will simply read from
+the in file and then generate a password to write to the out
+file. If the bool is true, then the function will read from the
+in file, and encrypt the password from the in file and write to
+the outfile.
+***************************************************************/
+
 void TextReader::CreateTextFile(std::string infile, std::string outfile, bool encrypt)
 {
 	// Opens the lastNames.txt and rawData.txt text files to read from and to write to respectively

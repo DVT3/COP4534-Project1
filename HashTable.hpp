@@ -7,6 +7,17 @@
 #include <string>
 #include <sstream>
 
+/***************************************************************
+Student Name: Daniel Tran
+File Name: HashTable.hpp
+Assignment number: Project 1
+
+This is the header file for HashTable.cpp. This file declares the
+hash algorithm. It also has methods that allow for inserting into
+the hash table and searching the hash table. A Node pointer array
+named table is initialized with null pointers.
+***************************************************************/
+
 class HashTable
 {
 	public:

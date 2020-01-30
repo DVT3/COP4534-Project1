@@ -6,6 +6,15 @@
 #include <cstdlib>
 #include <sstream>
 
+/***************************************************************
+Student Name: Daniel Tran
+File Name: TextReader.hpp
+Assignment number: Project 1
+
+This header file declares the CreateTextFile method for this
+class.
+***************************************************************/
+
 class TextReader
 {
 	public:
